@@ -1,17 +1,17 @@
 # Helaman Green - Software Services
 
-Landing page bilingÅe y responsive para presentar servicios, precios, tecnolog°a y contacto directo.
+Bilingual and responsive landing page for software services, pricing, technology, and direct contact.
 
-## Estructura
+## Structure
 
-- `index.html`: contenido y metadatos.
-- `css/styles.css`: dise§o responsive.
-- `js/app.js`: selecci¢n de idioma y enlaces de WhatsApp.
+- `index.html`: content and metadata.
+- `css/styles.css`: responsive design.
+- `js/app.js`: language selection and WhatsApp links.
 
-## Ejecutar localmente
+## Local preview
 
-Abre `index.html` o inicia un servidor est†tico y visita la direcci¢n local.
+Open `index.html` or serve the repository with a local static server.
 
-## Publicaci¢n
+## Publishing
 
-El proyecto est† preparado para publicarse desde la rama `main` con GitHub Pages.
+The site is published from the `main` branch with GitHub Pages.
