@@ -37,4 +37,86 @@ footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-betw
 .audience b,.tech small,.price>span{font-size:13px}
 .hero-card-header,.contact-label{font-size:12px}
 .lang-button{min-height:44px;min-width:44px}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+/* Motion stays decorative: content is visible without JavaScript. */
+body{background:radial-gradient(ellipse at 90% 0%,#d9eaff80,transparent 36rem),#fbfcfe}
+.site-header{position:relative;z-index:5}
+.hero-copy,.hero-card,.section-heading,.stack-copy,.contact-copy{min-width:0}
+.hero-card{background:linear-gradient(145deg,#f1f7ff,#e7f0fd);box-shadow:0 16px 48px #234d8209}
+.hero-card::before{width:72px;background:linear-gradient(90deg,var(--blue),#79b8ff);border-radius:0 0 4px 4px}
+@supports(background-clip:text){h1 span{background:linear-gradient(115deg,#104cad,#1873ef 60%,#087e9c);background-clip:text;-webkit-background-clip:text;color:transparent}}
+.button,.service-card,.tech,.service-icon,.brand-mark{transition:transform .24s ease,box-shadow .24s ease,background .24s ease,border-color .24s ease}
+.button .inline-icon,.service-link .inline-icon{transition:transform .24s ease}
+.button-primary{background:linear-gradient(120deg,#1059c9,#1978ec);box-shadow:0 6px 18px #1261d726}
+.featured-card{background:linear-gradient(145deg,#10244a,#173968)}
+.contact-section{background:radial-gradient(ellipse at 100% 0%,#22548d80,transparent 70%),var(--navy)}
+.desktop-nav a[aria-current="location"]{color:var(--blue)}
+.desktop-nav a[aria-current="location"]::after{width:100%}
+.button:active,.lang-button:active{transform:scale(.98)}
+.lang-button{transition:background .2s,box-shadow .2s,transform .2s}
+@media(hover:hover) and (pointer:fine){
+  .service-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px #12335b12}
+  .service-card:hover .service-icon{transform:translateY(-2px) rotate(-4deg);background:#dfedff}
+  .featured-card:hover .service-icon{background:#ffffff20}
+  .tech:hover{transform:translateY(-3px);box-shadow:0 10px 25px #234d8210;border-color:#b5ccea}
+  .button:hover .inline-icon,.service-link:hover .inline-icon{transform:translateX(4px)}
+  .brand:hover .brand-mark{transform:rotate(-5deg)}
+}
+.service-card:focus-within{box-shadow:0 0 0 3px #1261d71a}
+@media(max-width:800px){
+  html{scroll-padding-top:154px}
+  .site-header{position:sticky;top:0;background:#fbfcfef5;box-shadow:0 8px 20px #10244a06;border-bottom:1px solid #dce5ef;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .desktop-nav{gap:6px;justify-content:stretch;padding-top:10px}
+  .desktop-nav a{flex:1;text-align:center;min-height:44px;border-radius:10px;display:grid;place-items:center;padding:8px}
+  .desktop-nav a::after{display:none}
+  .desktop-nav a[aria-current="location"]{background:#e8f1ff}
+  .hero{padding:38px 0 44px;gap:28px}
+  .section{padding:44px 0}
+  .stack-section,.contact-section{padding:30px;gap:28px}
+  .stack-section{margin-bottom:44px}
+  .hero-card h2{font-size:26px}
+  .hero-card-header{margin-bottom:16px}
+  .hero-card h2{margin-bottom:16px}
+  .process-list>div{padding:13px 0}
+  .process-note{margin-bottom:16px}
+  .audience{padding-top:16px}
+}
+@media(max-width:520px){
+  .site-header{padding:10px 0 8px;gap:8px}
+  .hero{padding-top:30px}
+  .hero .eyebrow{margin-bottom:18px;font-size:11px}
+  h1{font-size:clamp(36px,10.2vw,50px);line-height:1.12;margin-bottom:20px}
+  .hero-lead{line-height:1.75;margin-bottom:24px}
+  .hero-actions{gap:8px}
+  .hero-actions .button{min-height:56px}
+  .hero-actions .text-link{min-height:44px;display:grid;place-items:center}
+  .trust-list{display:grid;gap:8px;margin-top:18px;font-size:13px}
+  .hero-card{padding:22px;border-radius:22px}
+  .hero-card h2{font-size:24px}
+  .process-list strong{font-size:14px}
+  .audience b{font-size:12px;padding:6px 9px}
+  .services-grid{gap:14px}
+  .service-card{padding:22px;border-radius:18px}
+  .service-number{top:25px;right:22px}
+  .service-icon{width:46px;height:46px;margin-bottom:18px}
+  .service-card h3{font-size:21px}
+  .service-card>p{line-height:1.7;margin-bottom:20px}
+  .price{padding-top:16px}
+  .service-link{min-height:48px;margin-top:10px;border-top:1px solid #dce5ef;padding-top:6px}
+  .featured-card .service-link{border-color:#ffffff25}
+  .section-heading{margin-bottom:26px;gap:14px}
+  .section-heading h2,.contact-copy h2{font-size:30px;line-height:1.18}
+  .stack-section,.contact-section{padding:26px 20px}
+  .stack-copy h2{font-size:28px}
+  .tech{padding:18px 12px;gap:12px}
+  .tech strong{font-size:14px}
+  .tech small{font-size:12px}
+  .contact-card{padding:22px 16px}
+  .contact-card>a:not(.button){min-height:44px;display:flex;align-items:center;margin:4px 0 16px}
+  footer{padding:28px 0;gap:16px}
+  .back-top{min-height:44px;display:grid;place-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .button:hover,.button:active,.service-card:hover,.tech:hover,.brand:hover .brand-mark,.service-card:hover .service-icon,.button:hover .inline-icon,.service-link:hover .inline-icon{transform:none}
+}

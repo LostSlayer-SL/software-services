@@ -164,3 +164,45 @@ try { savedLanguage = localStorage.getItem("language"); } catch {}
 const requestedLanguage = new URLSearchParams(location.search).get("lang");
 const browserLanguage = navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
 setLanguage(["es","en"].includes(requestedLanguage) ? requestedLanguage : ["es","en"].includes(savedLanguage) ? savedLanguage : browserLanguage);
+
+// Animate only when content enters the viewport; nothing is hidden on load.
+const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+const runningAnimations = new Set();
+if ("IntersectionObserver" in window && Element.prototype.animate) {
+  const revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      revealObserver.unobserve(entry.target);
+      if (motionPreference.matches) continue;
+      const group = entry.target.parentElement;
+      const stagger = group.matches(".services-grid, .stack-grid")
+        ? [...group.children].indexOf(entry.target) % 3 * 65 : 0;
+      const animation = entry.target.animate([
+        { opacity: 0, transform: "translateY(18px)" },
+        { opacity: 1, transform: "translateY(0)" }
+      ], { duration: 520, delay: stagger, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" });
+      runningAnimations.add(animation);
+      animation.finished.then(() => runningAnimations.delete(animation), () => runningAnimations.delete(animation));
+    }
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".hero-copy,.hero-card,.section-heading,.service-card,.stack-copy,.tech,.contact-copy,.contact-card")
+    .forEach(el => revealObserver.observe(el));
+  motionPreference.addEventListener("change", () => {
+    if (motionPreference.matches) runningAnimations.forEach(animation => animation.cancel());
+  });
+}
+
+// Keep section navigation useful on touch screens as well as desktop.
+if ("IntersectionObserver" in window) {
+  const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+  const sectionObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      navLinks.forEach(link => {
+        if (link.hash === "#" + entry.target.id) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    }
+  }, { rootMargin: "-20% 0px -55% 0px", threshold: 0 });
+  document.querySelectorAll("#top,#services,#stack,#contact").forEach(section => sectionObserver.observe(section));
+}
